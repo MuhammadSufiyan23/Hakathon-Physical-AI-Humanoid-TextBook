@@ -21,7 +21,6 @@ export default function ChatbotUI() {
 
     const userText = input.trim();
 
-    // User message aur "Thinking..." add karo
     setMessages((prev) => [
       ...prev,
       { role: "user", text: userText },
@@ -31,7 +30,6 @@ export default function ChatbotUI() {
     setInput("");
 
     try {
-      // Live Railway backend pe call
       const response = await fetch("https://hakathon-physical-ai-humanoid-textbook-production.up.railway.app/api/v1/query", {
         method: "POST",
         headers: {
@@ -41,7 +39,7 @@ export default function ChatbotUI() {
           question: userText,
           selected_text: "",
         }),
-        signal: AbortSignal.timeout(90000), // 90 seconds timeout (Cohere ke liye safe)
+        signal: AbortSignal.timeout(90000),
       });
 
       if (!response.ok) {
@@ -50,7 +48,6 @@ export default function ChatbotUI() {
 
       const data = await response.json();
 
-      // Real answer se "Thinking..." replace karo
       setMessages((prev) =>
         prev.map((msg, index) =>
           msg.thinking && index === prev.length - 1
@@ -70,9 +67,9 @@ export default function ChatbotUI() {
       let errorText = "❌ Error: Could not connect to the assistant.";
 
       if (error.name === "TimeoutError" || error.name === "AbortError") {
-        errorText = "⏳ Response took too long. Please try again or ask a shorter question.";
+        errorText = "⏳ Response took too long. Please try again.";
       } else if (error.message.includes("Failed to fetch")) {
-        errorText = "🌐 Cannot reach the server. Please check your internet connection.";
+        errorText = "🌐 Cannot reach the server. Check your connection.";
       }
 
       setMessages((prev) =>
@@ -88,15 +85,15 @@ export default function ChatbotUI() {
 
   return (
     <>
-      {/* Floating Button */}
+      {/* Floating Button - Mobile friendly */}
       <div
         onClick={() => setOpen(true)}
         style={{
           position: "fixed",
-          bottom: 24,
-          right: 24,
-          width: 64,
-          height: 64,
+          bottom: 20,
+          right: 20,
+          width: 60,
+          height: 60,
           borderRadius: "50%",
           background: "linear-gradient(135deg, #7c3aed, #4f46e5)",
           color: "#fff",
@@ -106,43 +103,48 @@ export default function ChatbotUI() {
           fontSize: 28,
           cursor: "pointer",
           zIndex: 9999,
-          boxShadow: "0 10px 30px rgba(124,58,237,.4)",
+          boxShadow: "0 8px 25px rgba(124,58,237,.5)",
         }}
       >
         🤖
       </div>
 
-      {/* Chat Window */}
+      {/* Chat Window - Fully Responsive */}
       {open && (
         <div
           style={{
             position: "fixed",
-            bottom: 100,
-            right: 24,
-            width: 420,
-            height: 560,
+            bottom: 90,
+            left: 16,
+            right: 16,
+            width: "calc(100% - 32px)",
+            maxWidth: 440,
+            height: "80vh",
+            maxHeight: 600,
             background: "#020617",
             color: "#fff",
             borderRadius: 16,
             zIndex: 9999,
             display: "flex",
             flexDirection: "column",
-            boxShadow: "0 20px 60px rgba(0,0,0,.6)",
+            boxShadow: "0 20px 60px rgba(0,0,0,.8)",
             border: "1px solid #1e293b",
+            margin: "0 auto",
           }}
         >
           {/* Header */}
           <div
             style={{
-              padding: "14px 16px",
+              padding: "16px",
               borderBottom: "1px solid #1e293b",
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
+              flexShrink: 0,
             }}
           >
             <div>
-              <div style={{ fontWeight: 600, fontSize: 15 }}>
+              <div style={{ fontWeight: 600, fontSize: 16 }}>
                 🤖 Book Assistant
               </div>
               <div style={{ fontSize: 12, opacity: 0.7 }}>
@@ -155,8 +157,9 @@ export default function ChatbotUI() {
                 background: "transparent",
                 border: "none",
                 color: "#94a3b8",
-                fontSize: 18,
+                fontSize: 20,
                 cursor: "pointer",
+                padding: "4px",
               }}
             >
               ✖
@@ -167,17 +170,17 @@ export default function ChatbotUI() {
           <div
             style={{
               flex: 1,
-              padding: 12,
+              padding: "12px 16px",
               overflowY: "auto",
             }}
           >
             {messages.length === 0 && (
               <div
                 style={{
-                  fontSize: 13,
+                  fontSize: 14,
                   opacity: 0.6,
                   textAlign: "center",
-                  marginTop: 40,
+                  marginTop: 60,
                 }}
               >
                 👋 Ask me anything about Physical AI & Robotics
@@ -190,24 +193,24 @@ export default function ChatbotUI() {
                 style={{
                   display: "flex",
                   justifyContent: m.role === "user" ? "flex-end" : "flex-start",
-                  marginBottom: 8,
+                  marginBottom: 12,
                 }}
               >
                 <div
                   style={{
-                    maxWidth: "75%",
-                    padding: "8px 12px",
-                    borderRadius: 12,
+                    maxWidth: "80%",
+                    padding: "10px 14px",
+                    borderRadius: 16,
                     background:
                       m.role === "user"
                         ? "#4f46e5"
                         : m.thinking
-                        ? "#020617"
+                        ? "#1e293b"
                         : "#1e293b",
                     border: m.thinking ? "1px dashed #475569" : "none",
-                    fontSize: 13,
+                    fontSize: 14,
                     fontStyle: m.thinking ? "italic" : "normal",
-                    opacity: m.thinking ? 0.85 : 1,
+                    opacity: m.thinking ? 0.8 : 1,
                   }}
                 >
                   {m.thinking ? (
@@ -216,7 +219,7 @@ export default function ChatbotUI() {
                       <span
                         style={{
                           display: "inline-block",
-                          width: "1.5em",
+                          width: "1.8em",
                           textAlign: "left",
                         }}
                       >
@@ -235,10 +238,11 @@ export default function ChatbotUI() {
           {/* Input Area */}
           <div
             style={{
-              padding: 12,
+              padding: "12px 16px",
               borderTop: "1px solid #1e293b",
               display: "flex",
-              gap: 8,
+              gap: 10,
+              flexShrink: 0,
             }}
           >
             <input
@@ -248,26 +252,26 @@ export default function ChatbotUI() {
               placeholder="Ask about Physical AI, robotics..."
               style={{
                 flex: 1,
-                padding: "10px 12px",
-                borderRadius: 10,
-                background: "#020617",
+                padding: "12px 16px",
+                borderRadius: 12,
+                background: "#0f172a",
                 border: "1px solid #1e293b",
                 color: "#fff",
                 outline: "none",
-                fontSize: 13,
+                fontSize: 14,
               }}
             />
             <button
               onClick={sendMessage}
               style={{
-                padding: "0 16px",
-                borderRadius: 10,
+                padding: "0 20px",
+                borderRadius: 12,
                 background: "#7c3aed",
                 color: "#fff",
                 border: "none",
                 cursor: "pointer",
-                fontSize: 13,
-                fontWeight: 500,
+                fontSize: 14,
+                fontWeight: 600,
               }}
             >
               Send
