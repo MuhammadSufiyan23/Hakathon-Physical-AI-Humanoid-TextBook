@@ -1,0 +1,314 @@
+openapi: 3.0.0
+info:
+  title: Humanoid Robotics Book API
+  description: API for the AI-native technical textbook on Physical AI & Humanoid Robotics
+  version: 1.0.0
+servers:
+  - url: https://api.humanoid-robotics-book.com
+    description: Production server
+  - url: https://staging-api.humanoid-robotics-book.com
+    description: Staging server
+
+paths:
+  /api/auth/register:
+    post:
+      summary: Register a new user
+      description: Creates a new user account with skill level and hardware information
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRegistration'
+      responses:
+        '201':
+          description: User successfully registered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/auth/login:
+    post:
+      summary: Login user
+      description: Authenticates a user and returns session information
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: password
+              required:
+                - email
+                - password
+      responses:
+        '200':
+          description: Successfully authenticated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSession'
+        '401':
+          description: Invalid credentials
+
+  /api/user/profile:
+    get:
+      summary: Get user profile
+      description: Retrieves the authenticated user's profile information
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: User profile retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+    put:
+      summary: Update user profile
+      description: Updates the authenticated user's profile information
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdate'
+      responses:
+        '200':
+          description: User profile updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+
+  /api/content/chapters:
+    get:
+      summary: List all chapters
+      description: Retrieves a list of all textbook chapters
+      responses:
+        '200':
+          description: List of chapters
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  chapters:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Chapter'
+
+  /api/content/chapters/{chapterId}:
+    get:
+      summary: Get chapter content
+      description: Retrieves the content of a specific chapter
+      parameters:
+        - name: chapterId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Chapter content retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Chapter'
+        '404':
+          description: Chapter not found
+
+  /api/user/progress:
+    get:
+      summary: Get user progress
+      description: Retrieves the authenticated user's learning progress
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: User progress retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  progress:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UserProgress'
+    post:
+      summary: Update user progress
+      description: Updates the authenticated user's progress for a chapter
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProgressUpdate'
+      responses:
+        '200':
+          description: Progress updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProgress'
+
+components:
+  schemas:
+    UserRegistration:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+        name:
+          type: string
+        skill_level:
+          type: string
+          enum: [beginner, intermediate, advanced]
+        programming_experience:
+          type: string
+        hardware_availability:
+          type: string
+      required:
+        - email
+        - password
+        - name
+        - skill_level
+
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+          format: email
+        name:
+          type: string
+        skill_level:
+          type: string
+          enum: [beginner, intermediate, advanced]
+        programming_experience:
+          type: string
+        hardware_availability:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    UserUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        skill_level:
+          type: string
+          enum: [beginner, intermediate, advanced]
+        programming_experience:
+          type: string
+        hardware_availability:
+          type: string
+
+    UserSession:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/User'
+        token:
+          type: string
+        expires_at:
+          type: string
+          format: date-time
+
+    Chapter:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        slug:
+          type: string
+        week_number:
+          type: integer
+        content:
+          type: string
+        order:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    UserProgress:
+      type: object
+      properties:
+        id:
+          type: string
+        user_id:
+          type: string
+        chapter_id:
+          type: string
+        completed:
+          type: boolean
+        quiz_score:
+          type: number
+        completed_at:
+          type: string
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    ProgressUpdate:
+      type: object
+      properties:
+        chapter_id:
+          type: string
+        completed:
+          type: boolean
+        quiz_score:
+          type: number
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

@@ -1,0 +1,597 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #3FE0FF; /* Primary Neon */
+  --ifm-color-primary-dark: #2ab6d9;
+  --ifm-color-primary-darker: #25a3c2;
+  --ifm-color-primary-darkest: #1e8aa6;
+  --ifm-color-primary-light: #65e6ff;
+  --ifm-color-primary-lighter: #7ce8ff;
+  --ifm-color-primary-lightest: #a0efff;
+  --ifm-color-secondary: #7C7CFF; /* Secondary Neon */
+  --ifm-color-secondary-dark: #5a5aff;
+  --ifm-color-secondary-darker: #4242ff;
+  --ifm-color-secondary-darkest: #2b2bff;
+  --ifm-color-secondary-light: #9e9eff;
+  --ifm-color-secondary-lighter: #b6b6ff;
+  --ifm-color-secondary-lightest: #d6d6ff;
+  --ifm-color-accent: #A855F7; /* Accent Purple */
+  --ifm-color-accent-dark: #8a3fd6;
+  --ifm-color-accent-darker: #7a37bf;
+  --ifm-color-accent-darkest: #662e9e;
+  --ifm-color-accent-light: #ba79f9;
+  --ifm-color-accent-lighter: #cda3fb;
+  --ifm-color-accent-lightest: #e4d2fe;
+  --ifm-background-color: #0B0F14; /* Background Dark */
+  --ifm-background-surface-color: #111827; /* Surface Dark */
+  --ifm-color-content: #E5E7EB; /* Text Main */
+  --ifm-color-content-secondary: #9CA3AF; /* Text Muted */
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(63, 224, 255, 0.1);
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary: #3FE0FF; /* Primary Neon */
+  --ifm-color-primary-dark: #2ab6d9;
+  --ifm-color-primary-darker: #25a3c2;
+  --ifm-color-primary-darkest: #1e8aa6;
+  --ifm-color-primary-light: #65e6ff;
+  --ifm-color-primary-lighter: #7ce8ff;
+  --ifm-color-primary-lightest: #a0efff;
+  --ifm-color-secondary: #7C7CFF; /* Secondary Neon */
+  --ifm-color-secondary-dark: #5a5aff;
+  --ifm-color-secondary-darker: #4242ff;
+  --ifm-color-secondary-darkest: #2b2bff;
+  --ifm-color-secondary-light: #9e9eff;
+  --ifm-color-secondary-lighter: #b6b6ff;
+  --ifm-color-secondary-lightest: #d6d6ff;
+  --ifm-color-accent: #A855F7; /* Accent Purple */
+  --ifm-color-accent-dark: #8a3fd6;
+  --ifm-color-accent-darker: #7a37bf;
+  --ifm-color-accent-darkest: #662e9e;
+  --ifm-color-accent-light: #ba79f9;
+  --ifm-color-accent-lighter: #cda3fb;
+  --ifm-color-accent-lightest: #e4d2fe;
+  --ifm-background-color: #0B0F14; /* Background Dark */
+  --ifm-background-surface-color: #111827; /* Surface Dark */
+  --ifm-color-content: #E5E7EB; /* Text Main */
+  --ifm-color-content-secondary: #9CA3AF; /* Text Muted */
+  --docusaurus-highlighted-code-line-bg: rgba(63, 224, 255, 0.1);
+}
+
+/* Global styling */
+body {
+  background: linear-gradient(135deg, #0B0F14 0%, #111827 100%) !important;
+  color: var(--ifm-color-content);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+* {
+  transition: all 0.3s ease;
+}
+
+/* Enhanced heading styling with neon glow */
+h1 {
+  color: var(--ifm-color-primary) !important;
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(63, 224, 255, 0.5);
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid var(--ifm-color-primary);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Remove border from hero title to avoid line between title lines */
+.hero__title {
+  border-bottom: none !important;
+  padding-bottom: 0 !important;
+}
+
+h2 {
+  color: var(--ifm-color-secondary) !important;
+  font-weight: 600;
+  text-shadow: 0 0 6px rgba(124, 124, 255, 0.4);
+  letter-spacing: 0.3px;
+  border-bottom: 1px solid var(--ifm-color-secondary);
+  padding-bottom: 0.3rem;
+  margin-bottom: 1.2rem;
+}
+
+h3 {
+  color: var(--ifm-color-accent) !important;
+  font-weight: 500;
+  text-shadow: 0 0 4px rgba(168, 85, 247, 0.3);
+  letter-spacing: 0.2px;
+  margin-bottom: 1rem;
+}
+
+h4 {
+  color: var(--ifm-color-accent-light) !important;
+  font-weight: 500;
+  text-shadow: 0 0 3px rgba(186, 121, 249, 0.2);
+  letter-spacing: 0.1px;
+}
+
+/* Paragraph text styling */
+p {
+  color: var(--ifm-color-content) !important;
+  line-height: 1.8 !important;
+  margin-bottom: 1rem;
+}
+
+/* Enhanced code block styling */
+.code-block {
+  background-color: #f8f9fa;
+  border-left: 4px solid var(--ifm-color-secondary);
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 0 4px 4px 0;
+}
+
+[data-theme='dark'] .code-block {
+  background-color: #2d3748;
+  border-left: 4px solid var(--ifm-color-secondary);
+}
+
+/* Enhanced blockquote styling */
+blockquote {
+  border-left: 4px solid var(--ifm-color-accent);
+  background-color: #f8fafc;
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  border-radius: 0 4px 4px 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+[data-theme='dark'] blockquote {
+  background-color: #2d3748;
+  border-left: 4px solid var(--ifm-color-accent);
+}
+
+/* Homepage hero section styling */
+.hero {
+  background: linear-gradient(135deg, #0B0F14 0%, #111827 100%) !important;
+  padding: 4rem 2rem;
+}
+
+/* Hero image styling */
+.hero__image {
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(63, 224, 255, 0.5);
+  transition: all 0.3s ease;
+}
+
+.hero__image:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 30px rgba(63, 224, 255, 0.8);
+}
+
+/* Hero text styling */
+.hero__title {
+  color: var(--ifm-color-primary) !important;
+  text-shadow: 0 0 10px rgba(63, 224, 255, 0.6) !important;
+  font-size: 3rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 1rem !important;
+}
+
+.hero__subtitle {
+  color: var(--ifm-color-content-secondary) !important;
+  font-size: 1.2rem !important;
+  margin-bottom: 2rem !important;
+}
+
+/* Start Reading button styling */
+.button--primary {
+  background: linear-gradient(90deg, var(--ifm-color-primary) 0%, var(--ifm-color-accent) 100%) !important;
+  border: 1px solid var(--ifm-color-primary) !important;
+  color: white !important;
+  padding: 1rem 2rem !important;
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 15px rgba(63, 224, 255, 0.3) !important;
+}
+
+.button--primary:hover {
+  box-shadow: 0 0 25px rgba(63, 224, 255, 0.6), 0 -5px 15px rgba(168, 85, 247, 0.4) !important;
+  transform: translateY(-3px) !important;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Book content area styling */
+.main-wrapper {
+  background: linear-gradient(135deg, #0B0F14 0%, #111827 100%);
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1200px;
+  padding: 0 1.5rem;
+}
+
+.markdown {
+  background-color: rgba(17, 24, 39, 0.8) !important;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  margin-bottom: 2rem;
+  backdrop-filter: blur(10px);
+}
+
+/* Documentation headings styling */
+.markdown h1 {
+  color: var(--ifm-color-primary) !important;
+  text-shadow: 0 0 10px rgba(63, 224, 255, 0.3) !important;
+  border-bottom: 2px solid var(--ifm-color-primary) !important;
+  padding-bottom: 0.5rem !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.markdown h2 {
+  color: var(--ifm-color-secondary) !important;
+  text-shadow: 0 0 8px rgba(124, 124, 255, 0.3) !important;
+  border-bottom: 1px solid var(--ifm-color-secondary) !important;
+  padding-bottom: 0.4rem !important;
+  margin-bottom: 1.2rem !important;
+}
+
+.markdown h3 {
+  color: var(--ifm-color-accent) !important;
+  text-shadow: 0 0 6px rgba(168, 85, 247, 0.3) !important;
+  margin-bottom: 1rem !important;
+}
+
+/* Documentation paragraph text styling */
+.markdown p {
+  color: var(--ifm-color-content) !important;
+  line-height: 1.8 !important;
+  margin-bottom: 1rem !important;
+}
+
+/* Enhanced table styling */
+table {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  background-color: var(--ifm-card-background-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+}
+
+th {
+  background-color: var(--ifm-color-primary);
+  color: white;
+  font-weight: 600;
+}
+
+td {
+  border-top: 1px solid var(--ifm-color-emphasis-300);
+  padding: 0.75rem;
+}
+
+[data-theme='dark'] th {
+  background-color: var(--ifm-color-primary);
+  color: var(--ifm-color-text);
+}
+
+/* Neon sidebar styling */
+.menu {
+  background-color: rgba(17, 24, 39, 0.9) !important;
+  backdrop-filter: blur(10px);
+  border-right: 1px solid rgba(63, 224, 255, 0.2);
+}
+
+.menu__list-item-collapsible:hover,
+.menu__list-item a:hover {
+  color: var(--ifm-color-primary) !important;
+  text-shadow: 0 0 8px rgba(63, 224, 255, 0.5) !important;
+  background-color: rgba(63, 224, 255, 0.1) !important;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.menu__link--active {
+  color: var(--ifm-color-primary) !important;
+  text-shadow: 0 0 8px rgba(63, 224, 255, 0.5) !important;
+  border-left: 3px solid var(--ifm-color-primary) !important;
+  background-color: rgba(63, 224, 255, 0.1) !important;
+}
+
+.menu__list-item-collapsible--active {
+  background-color: rgba(63, 224, 255, 0.1) !important;
+}
+
+/* Table of Contents styling */
+.table-of-contents {
+  background-color: rgba(17, 24, 39, 0.8) !important;
+  border-left: 2px solid var(--ifm-color-primary) !important;
+  border-radius: 8px !important;
+  padding: 1rem !important;
+  backdrop-filter: blur(10px);
+}
+
+.table-of-contents__link {
+  color: var(--ifm-color-content-secondary) !important;
+  transition: all 0.3s ease !important;
+}
+
+.table-of-contents__link:hover {
+  color: var(--ifm-color-primary) !important;
+  text-shadow: 0 0 8px rgba(63, 224, 255, 0.5) !important;
+}
+
+.table-of-contents__link--active {
+  color: var(--ifm-color-primary) !important;
+  text-shadow: 0 0 8px rgba(63, 224, 255, 0.5) !important;
+  text-decoration: underline !important;
+  font-weight: 600 !important;
+}
+
+.table-of-contents__title {
+  color: var(--ifm-color-primary) !important;
+  text-shadow: 0 0 8px rgba(63, 224, 255, 0.3) !important;
+  font-weight: 600 !important;
+  margin-bottom: 0.5rem !important;
+}
+
+/* Enhanced table styling */
+table {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+/* Neon code block styling */
+code {
+  background-color: rgba(30, 30, 30, 0.3) !important;
+  color: #4fd1ff !important;
+  padding: 2px 6px !important;
+  border-radius: 4px;
+  font-family: 'SFMono-Regular', 'Consolas', 'Menlo', monospace;
+}
+
+pre code {
+  background-color: transparent !important;
+  color: inherit !important;
+  padding: 0 !important;
+}
+
+pre {
+  background-color: #1a1a1a !important;
+  border-left: 3px solid #4fd1ff !important;
+  border-radius: 0 8px 8px 0;
+  padding: 1rem !important;
+  overflow-x: auto;
+  box-shadow: 0 0 15px rgba(79, 209, 255, 0.1);
+}
+
+[data-theme='dark'] pre {
+  background-color: #1a1a1a !important;
+  border-left: 3px solid #4fd1ff !important;
+  box-shadow: 0 0 15px rgba(79, 209, 255, 0.1);
+}
+
+th {
+  background-color: var(--ifm-color-primary);
+  color: white;
+  font-weight: 600;
+}
+
+td {
+  border-top: 1px solid var(--ifm-color-emphasis-300);
+}
+
+[data-theme='dark'] th {
+  background-color: var(--ifm-color-primary);
+  color: var(--ifm-color-text);
+}
+
+/* Neon button styling */
+.button {
+  border: 1px solid var(--ifm-color-primary) !important;
+  background-color: transparent !important;
+  color: var(--ifm-color-primary) !important;
+  transition: all 0.3s ease !important;
+  position: relative;
+  overflow: hidden !important;
+}
+
+.button:hover {
+  background-color: rgba(79, 209, 255, 0.1) !important;
+  box-shadow: 0 0 15px rgba(79, 209, 255, 0.3) !important;
+  text-shadow: 0 0 8px rgba(79, 209, 255, 0.5) !important;
+  transform: translateY(-2px);
+}
+
+.button--primary {
+  background-color: transparent !important;
+  border: 1px solid var(--ifm-color-primary) !important;
+  color: var(--ifm-color-primary) !important;
+}
+
+.button--primary:hover {
+  background-color: rgba(79, 209, 255, 0.2) !important;
+  box-shadow: 0 0 20px rgba(79, 209, 255, 0.4) !important;
+}
+
+.button--secondary {
+  background-color: transparent !important;
+  border: 1px solid var(--ifm-color-secondary) !important;
+  color: var(--ifm-color-secondary) !important;
+}
+
+.button--secondary:hover {
+  background-color: rgba(189, 56, 230, 0.2) !important;
+  box-shadow: 0 0 20px rgba(189, 56, 230, 0.4) !important;
+}
+
+/* Homepage cards styling */
+.card {
+  background: rgba(17, 24, 39, 0.6) !important;
+  border: 1px solid rgba(63, 224, 255, 0.3) !important;
+  border-radius: 12px !important;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+  overflow: hidden !important;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(63, 224, 255, 0.4) !important;
+  border-color: rgba(63, 224, 255, 0.6) !important;
+}
+
+.card__header h3 {
+  color: var(--ifm-color-primary) !important;
+  text-shadow: 0 0 6px rgba(63, 224, 255, 0.3) !important;
+}
+
+.card__image {
+  border-radius: 8px;
+  filter: grayscale(20%);
+  transition: all 0.3s ease;
+}
+
+.card__image:hover {
+  filter: grayscale(0%);
+  box-shadow: 0 0 15px rgba(63, 224, 255, 0.5);
+}
+
+/* Footer styling */
+.footer {
+  background-color: #080c11 !important;
+  border-top: 1px solid rgba(63, 224, 255, 0.2) !important;
+  padding: 2rem 0 !important;
+}
+
+.footer__link-item {
+  color: var(--ifm-color-primary) !important;
+  transition: all 0.3s ease !important;
+}
+
+.footer__link-item:hover {
+  color: var(--ifm-color-primary-light) !important;
+  text-shadow: 0 0 8px rgba(63, 224, 255, 0.5) !important;
+}
+
+.footer__title {
+  color: var(--ifm-color-primary) !important;
+  text-shadow: 0 0 6px rgba(63, 224, 255, 0.3) !important;
+}
+
+/* Navbar link styling - Remove underline effects */
+.navbar__link {
+  text-decoration: none !important;
+  border-bottom: none !important;
+  background-image: none !important;
+  transition: all 0.3s ease !important;
+}
+
+.navbar__link:hover {
+  color: var(--ifm-color-primary-light) !important;
+  text-shadow: 0 0 8px rgba(63, 224, 255, 0.5) !important;
+  text-decoration: none !important;
+  border-bottom: none !important;
+}
+
+.navbar__title {
+  text-decoration: none !important;
+  border-bottom: none !important;
+  background-image: none !important;
+}
+
+.navbar__title:hover {
+  color: var(--ifm-color-primary-light) !important;
+  text-shadow: 0 0 8px rgba(63, 224, 255, 0.5) !important;
+  text-decoration: none !important;
+  border-bottom: none !important;
+}
+
+.navbar__item {
+  text-decoration: none !important;
+  border-bottom: none !important;
+  background-image: none !important;
+}
+
+.navbar__item:hover {
+  text-decoration: none !important;
+  border-bottom: none !important;
+}
+
+.navbar__link--active {
+  text-decoration: none !important;
+  border-bottom: none !important;
+}
+
+/* Neon link styling (for content links) - Remove underlines */
+a {
+  color: var(--ifm-color-primary) !important;
+  text-decoration: none !important;
+  transition: all 0.3s ease !important;
+}
+
+a:hover {
+  color: var(--ifm-color-primary-light) !important;
+  text-shadow: 0 0 8px rgba(63, 224, 255, 0.5) !important;
+}
+
+/* Additional link styling overrides to ensure no underlines anywhere */
+a:link, a:visited, a:hover, a:active {
+  text-decoration: none !important;
+  border-bottom: none !important;
+}
+
+/* Remove underlines from heading links */
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+  text-decoration: none !important;
+  border-bottom: none !important;
+}
+
+/* Remove underlines from button links */
+.button, .button:hover, .button:active, .button:focus {
+  text-decoration: none !important;
+  border-bottom: none !important;
+}
+
+/* Remove underlines from sidebar links */
+.menu__link, .menu__link:hover, .menu__link:active, .menu__link:focus {
+  text-decoration: none !important;
+  border-bottom: none !important;
+}
+
+/* Remove underlines from table of contents links */
+.table-of-contents__link, .table-of-contents__link:hover, .table-of-contents__link:active, .table-of-contents__link:focus {
+  text-decoration: none !important;
+  border-bottom: none !important;
+}
+
+/* Remove underlines from doc links */
+.navbar__link, .navbar__link:hover, .navbar__link:active, .navbar__link:focus,
+.navbar__title, .navbar__title:hover, .navbar__title:active, .navbar__title:focus,
+.navbar__item, .navbar__item:hover, .navbar__item:active, .navbar__item:focus,
+.navbar__link--active, .navbar__link--active:hover, .navbar__link--active:active, .navbar__link--active:focus {
+  text-decoration: none !important;
+  border-bottom: none !important;
+}
+
+/* Footer link styling - Remove underline */
+.footer__link-item, .footer__link-item:hover, .footer__link-item:active, .footer__link-item:focus {
+  text-decoration: none !important;
+  border-bottom: none !important;
+}
+
+/* Ensure all link states have no underline */
+a:link, a:visited, a:hover, a:active, a:focus {
+  text-decoration: none !important;
+  border-bottom: none !important;
+  background-image: none !important;
+}

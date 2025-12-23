@@ -1,0 +1,124 @@
+openapi: 3.0.0
+info:
+  title: RAG Chatbot Backend API
+  description: API for querying book content using RAG methodology
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000
+    description: Development server
+  - url: https://rag-chatbot.example.com
+    description: Production server
+
+paths:
+  /query:
+    post:
+      summary: Query book content with optional selected text context
+      description: Submit a question about book content with optional selected text for context isolation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryRequest'
+      responses:
+        '200':
+          description: Successful response with answer and sources
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryResponse'
+        '400':
+          description: Bad request - invalid input parameters
+        '422':
+          description: Unprocessable entity - validation error
+        '500':
+          description: Internal server error
+      security:
+        - apiKeyAuth: []
+
+  /health:
+    get:
+      summary: Health check endpoint
+      description: Check the health status of the API
+      responses:
+        '200':
+          description: API is healthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+        '500':
+          description: API is unhealthy
+
+components:
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+
+  schemas:
+    QueryRequest:
+      type: object
+      required:
+        - question
+      properties:
+        question:
+          type: string
+          description: The user's question about the book content
+          example: "What are the main themes in this book?"
+        selected_text:
+          type: string
+          description: Optional selected text to restrict context to only this content
+          example: "This is the specific text the user has selected..."
+        mode:
+          type: string
+          enum: [full_book, selected_text_only]
+          description: Query mode - defaults to full_book if not specified
+          default: full_book
+
+    QueryResponse:
+      type: object
+      required:
+        - answer
+        - sources
+        - confidence
+      properties:
+        answer:
+          type: string
+          description: The AI-generated answer based on book content
+          example: "The main themes in this book include..."
+        sources:
+          type: array
+          items:
+            type: string
+          description: IDs of content chunks used to generate the response
+          example: ["chunk_123", "chunk_456"]
+        confidence:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+          description: Confidence score of the generated answer
+          example: 0.85
+        tokens_used:
+          type: integer
+          description: Number of tokens used in the response
+          example: 45
+
+    HealthResponse:
+      type: object
+      required:
+        - status
+        - timestamp
+      properties:
+        status:
+          type: string
+          enum: [healthy, unhealthy]
+          description: Health status of the API
+          example: healthy
+        timestamp:
+          type: string
+          format: date-time
+          description: Timestamp of the health check
+          example: "2025-12-19T10:00:00Z"

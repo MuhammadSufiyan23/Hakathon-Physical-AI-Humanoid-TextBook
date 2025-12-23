@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rm:*)",
+      "Bash(dir \"D:\\Work Folder\\Humanoid Ai Book\\humanoid-robotics-book\\src\\pages\")",
+      "Bash(npx docusaurus clear)",
+      "Bash(netstat -ano)",
+      "Bash(findstr :3000)",
+      "Bash(taskkill /PID 12580 /F)",
+      "Bash(taskkill /f /pid 12580)",
+      "WebSearch",
+      "Bash(npm run api)",
+      "Bash(npx docusaurus start --port 3001)",
+      "Bash(npx docusaurus start --port 3003)",
+      "Bash(npx docusaurus start --port 3005)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
