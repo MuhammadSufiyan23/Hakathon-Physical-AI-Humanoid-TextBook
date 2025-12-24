@@ -92,6 +92,8 @@ function WhoThisBookFor() {
               <li>Step-by-step foundations</li>
               <li>Structured conceptual learning</li>
               <li>Curriculum-aligned learning</li>
+              <li>Concept-to-application clarity</li>
+              <li>Beginner-friendly progression</li>
             </ul>
           </div>
 
@@ -100,6 +102,8 @@ function WhoThisBookFor() {
             <ul className={styles.cardList}>
               <li>Real-world robotics pipelines</li>
               <li>Engineering-first explanations</li>
+              <li>Scalable system design</li>
+              <li>AI-to-production workflows</li>
             </ul>
           </div>
 
@@ -108,6 +112,8 @@ function WhoThisBookFor() {
             <ul className={styles.cardList}>
               <li>Embodied intelligence research</li>
               <li>Physical-world evaluation</li>
+              <li>Experimental insights</li>
+              <li>Future research directions</li>
             </ul>
           </div>
         </div>
