@@ -154,8 +154,6 @@
 
 
 
-
-
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 import {themes as prismThemes} from 'prism-react-renderer';
@@ -165,13 +163,13 @@ const config: Config = {
   tagline: 'A comprehensive textbook on Physical AI and Humanoid Robotics',
   favicon: 'img/headerlogo.png',
 
-  url: 'https://humanoid-robotics-book.com',
+  url: 'https://physical-ai-humanoid-course-textbook.vercel.app', // tumhara actual Vercel URL daal do
   baseUrl: '/',
 
-  organizationName: 'your-organization',
-  projectName: 'humanoid-robotics-book',
+  organizationName: 'MuhammadSufiyan23', // tumhara GitHub username daal do
+  projectName: 'Hakathon-Physical-AI-Humanoid-TextBook', // tumhara repo name
 
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn', // throw se warn kar diya taaki build na ruke
   onBrokenMarkdownLinks: 'warn',
 
   i18n: {
@@ -186,9 +184,9 @@ const config: Config = {
         docs: {
           sidebarPath: './sidebars.ts',
           routeBasePath: '/docs',
-          editUrl: 'https://github.com/your-organization/humanoid-robotics-book/edit/main/',
+          editUrl: 'https://github.com/MuhammadSufiyan23/Hakathon-Physical-AI-Humanoid-TextBook/edit/main/',
         },
-        blog: false, // agar blog nahi use kar rahe toh false kar do
+        blog: false,
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -217,12 +215,12 @@ const config: Config = {
           label: 'Book Chapters',
         },
         {
-          to: '/docs/physical-ai/introduction', // Direct link to intro page
+          to: '/docs/physical-ai/introduction',
           label: 'Start Reading',
           position: 'left',
         },
         {
-          href: 'https://github.com/your-organization/humanoid-robotics-book',
+          href: 'https://github.com/MuhammadSufiyan23/Hakathon-Physical-AI-Humanoid-TextBook',
           label: 'GitHub',
           position: 'right',
         },
@@ -266,18 +264,17 @@ const config: Config = {
           items: [
             {
               label: 'GitHub',
-              href: 'https://github.com/your-organization/humanoid-robotics-book',
+              href: 'https://github.com/MuhammadSufiyan23/Hakathon-Physical-AI-Humanoid-TextBook',
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Humanoid Robotics Book. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Muhammad Sufiyan. Built with Docusaurus.`,
     },
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
     },
-    // Mobile navigation improvements
     docs: {
       sidebar: {
         hideable: true,
