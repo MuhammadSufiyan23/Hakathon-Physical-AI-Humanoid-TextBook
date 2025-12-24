@@ -94,6 +94,9 @@ function WhoThisBookFor() {
               <li>Curriculum-aligned learning</li>
               <li>Concept-to-application clarity</li>
               <li>Beginner-friendly progression</li>
+              <li>Hands-on learning approach</li>
+              <li>Clear learning milestones</li>
+
             </ul>
           </div>
 
@@ -104,6 +107,8 @@ function WhoThisBookFor() {
               <li>Engineering-first explanations</li>
               <li>Scalable system design</li>
               <li>AI-to-production workflows</li>
+              <li>Modular architecture patterns</li>
+              <li>Deployment-ready insights</li>
             </ul>
           </div>
 
@@ -114,6 +119,8 @@ function WhoThisBookFor() {
               <li>Physical-world evaluation</li>
               <li>Experimental insights</li>
               <li>Future research directions</li>
+              <li>Benchmark-driven analysis</li>
+              <li>Cross-domain perspectives</li>
             </ul>
           </div>
         </div>
