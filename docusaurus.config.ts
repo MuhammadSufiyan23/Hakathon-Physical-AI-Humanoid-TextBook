@@ -217,7 +217,7 @@ const config: Config = {
           label: 'Book Chapters',
         },
         {
-          to: '/docs/physical-ai/introduction', // Direct "Start Reading" button
+          to: '/docs/physical-ai/introduction', // Direct link to intro page
           label: 'Start Reading',
           position: 'left',
         },
