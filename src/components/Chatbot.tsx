@@ -1,3 +1,4 @@
+
 // import React, { useState, useRef, useEffect } from "react";
 
 // type Message = {
@@ -85,13 +86,13 @@
 
 //   return (
 //     <>
-//       {/* Floating Button - Mobile friendly */}
+//       {/* Floating Button - Bottom Right */}
 //       <div
 //         onClick={() => setOpen(true)}
 //         style={{
 //           position: "fixed",
-//           bottom: 20,
-//           right: 20,
+//           bottom: 24,
+//           right: 24,
 //           width: 60,
 //           height: 60,
 //           borderRadius: "50%",
@@ -109,27 +110,26 @@
 //         🤖
 //       </div>
 
-//       {/* Chat Window - Fully Responsive */}
+//       {/* Chat Window - Center mein, content ke upar overlap na kare */}
 //       {open && (
 //         <div
 //           style={{
 //             position: "fixed",
-//             bottom: 90,
-//             left: 16,
-//             right: 16,
-//             width: "calc(100% - 32px)",
+//             top: "50%",
+//             left: "50%",
+//             transform: "translate(-50%, -50%)",
+//             width: "90%",
 //             maxWidth: 440,
 //             height: "80vh",
 //             maxHeight: 600,
 //             background: "#020617",
 //             color: "#fff",
 //             borderRadius: 16,
-//             zIndex: 9999,
+//             zIndex: 99999,
 //             display: "flex",
 //             flexDirection: "column",
 //             boxShadow: "0 20px 60px rgba(0,0,0,.8)",
 //             border: "1px solid #1e293b",
-//             margin: "0 auto",
 //           }}
 //         >
 //           {/* Header */}
@@ -299,7 +299,6 @@
 
 
 
-
 import React, { useState, useRef, useEffect } from "react";
 
 type Message = {
@@ -309,7 +308,7 @@ type Message = {
 };
 
 export default function ChatbotUI() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false); // Ab default closed rahega
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
@@ -387,68 +386,71 @@ export default function ChatbotUI() {
 
   return (
     <>
-      {/* Floating Button - Bottom Right */}
+      {/* Floating Round Button - Always visible */}
       <div
-        onClick={() => setOpen(true)}
+        onClick={() => setOpen(!open)}
         style={{
           position: "fixed",
           bottom: 24,
           right: 24,
-          width: 60,
-          height: 60,
+          width: 64,
+          height: 64,
           borderRadius: "50%",
           background: "linear-gradient(135deg, #7c3aed, #4f46e5)",
           color: "#fff",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          fontSize: 28,
+          fontSize: 32,
           cursor: "pointer",
-          zIndex: 9999,
-          boxShadow: "0 8px 25px rgba(124,58,237,.5)",
+          zIndex: 99999,
+          boxShadow: "0 10px 30px rgba(124, 58, 237, 0.4)",
+          transition: "all 0.3s ease",
+          border: "none",
         }}
       >
-        🤖
+        {open ? "✖" : "🤖"}
       </div>
 
-      {/* Chat Window - Center mein, content ke upar overlap na kare */}
+      {/* Chat Window - Bottom Right Corner (Side par) */}
       {open && (
         <div
           style={{
             position: "fixed",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: "90%",
-            maxWidth: 440,
-            height: "80vh",
-            maxHeight: 600,
+            bottom: 100, // Button ke upar
+            right: 24,
+            width: "380px",
+            height: "560px",
             background: "#020617",
             color: "#fff",
-            borderRadius: 16,
-            zIndex: 99999,
+            borderRadius: 20,
+            zIndex: 99998,
             display: "flex",
             flexDirection: "column",
-            boxShadow: "0 20px 60px rgba(0,0,0,.8)",
+            boxShadow: "0 20px 60px rgba(0,0,0,0.9)",
             border: "1px solid #1e293b",
+            animation: "slideUp 0.4s ease-out",
           }}
         >
           {/* Header */}
           <div
             style={{
-              padding: "16px",
+              padding: "18px 20px",
               borderBottom: "1px solid #1e293b",
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
               flexShrink: 0,
+              borderTopLeftRadius: 20,
+              borderTopRightRadius: 20,
+              background: "linear-gradient(to right, #1e1b4b, #0f172a)",
             }}
           >
             <div>
-              <div style={{ fontWeight: 600, fontSize: 16 }}>
+              <div style={{ fontWeight: 700, fontSize: 17 }}>
                 🤖 Book Assistant
               </div>
-              <div style={{ fontSize: 12, opacity: 0.7 }}>
+              <div style={{ fontSize: 13, opacity: 0.8 }}>
                 AI helper for Physical AI & Robotics
               </div>
             </div>
@@ -458,12 +460,12 @@ export default function ChatbotUI() {
                 background: "transparent",
                 border: "none",
                 color: "#94a3b8",
-                fontSize: 20,
+                fontSize: 26,
                 cursor: "pointer",
                 padding: "4px",
               }}
             >
-              ✖
+              ✕
             </button>
           </div>
 
@@ -471,17 +473,17 @@ export default function ChatbotUI() {
           <div
             style={{
               flex: 1,
-              padding: "12px 16px",
+              padding: "16px",
               overflowY: "auto",
             }}
           >
             {messages.length === 0 && (
               <div
                 style={{
-                  fontSize: 14,
-                  opacity: 0.6,
                   textAlign: "center",
-                  marginTop: 60,
+                  marginTop: 80,
+                  opacity: 0.7,
+                  fontSize: 15,
                 }}
               >
                 👋 Ask me anything about Physical AI & Robotics
@@ -494,38 +496,29 @@ export default function ChatbotUI() {
                 style={{
                   display: "flex",
                   justifyContent: m.role === "user" ? "flex-end" : "flex-start",
-                  marginBottom: 12,
+                  marginBottom: 16,
                 }}
               >
                 <div
                   style={{
                     maxWidth: "80%",
-                    padding: "10px 14px",
-                    borderRadius: 16,
+                    padding: "12px 16px",
+                    borderRadius: 18,
                     background:
                       m.role === "user"
-                        ? "#4f46e5"
+                        ? "#6366f1"
                         : m.thinking
                         ? "#1e293b"
                         : "#1e293b",
                     border: m.thinking ? "1px dashed #475569" : "none",
-                    fontSize: 14,
-                    fontStyle: m.thinking ? "italic" : "normal",
-                    opacity: m.thinking ? 0.8 : 1,
+                    fontSize: 14.5,
+                    lineHeight: "1.5",
                   }}
                 >
                   {m.thinking ? (
                     <>
                       Thinking
-                      <span
-                        style={{
-                          display: "inline-block",
-                          width: "1.8em",
-                          textAlign: "left",
-                        }}
-                      >
-                        <span className="animate-dots">...</span>
-                      </span>
+                      <span className="animate-dots">...</span>
                     </>
                   ) : (
                     m.text
@@ -539,10 +532,10 @@ export default function ChatbotUI() {
           {/* Input Area */}
           <div
             style={{
-              padding: "12px 16px",
+              padding: "16px",
               borderTop: "1px solid #1e293b",
               display: "flex",
-              gap: 10,
+              gap: 12,
               flexShrink: 0,
             }}
           >
@@ -553,27 +546,30 @@ export default function ChatbotUI() {
               placeholder="Ask about Physical AI, robotics..."
               style={{
                 flex: 1,
-                padding: "12px 16px",
-                borderRadius: 12,
+                padding: "14px 18px",
+                borderRadius: 16,
                 background: "#0f172a",
-                border: "1px solid #1e293b",
+                border: "1px solid #334155",
                 color: "#fff",
                 outline: "none",
-                fontSize: 14,
+                fontSize: 15,
               }}
             />
             <button
               onClick={sendMessage}
               style={{
-                padding: "0 20px",
-                borderRadius: 12,
-                background: "#7c3aed",
+                padding: "0 24px",
+                borderRadius: 16,
+                background: "linear-gradient(135deg, #7c3aed, #6d28d9)",
                 color: "#fff",
                 border: "none",
                 cursor: "pointer",
-                fontSize: 14,
                 fontWeight: 600,
+                fontSize: 15,
+                transition: "all 0.2s",
               }}
+              onMouseOver={(e) => (e.currentTarget.style.opacity = "0.9")}
+              onMouseOut={(e) => (e.currentTarget.style.opacity = "1")}
             >
               Send
             </button>
@@ -581,16 +577,31 @@ export default function ChatbotUI() {
         </div>
       )}
 
-      {/* Animated dots CSS */}
+      {/* Animations */}
       <style jsx global>{`
+        @keyframes slideUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
         @keyframes dotPulse {
           0%, 20% { opacity: 0; }
           40% { opacity: 1; }
           100% { opacity: 0; }
         }
+
         .animate-dots::after {
           content: '...';
           animation: dotPulse 1.5s infinite;
+          display: inline-block;
+          width: 1.8em;
+          text-align: left;
         }
       `}</style>
     </>
