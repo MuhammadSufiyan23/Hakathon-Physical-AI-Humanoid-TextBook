@@ -999,8 +999,8 @@
 
 
 
-
 import React, { useState, useRef, useEffect } from "react";
+import { BrowserOnly } from '@docusaurus/BrowserOnly';
 
 type Message = {
   role: "user" | "bot";
@@ -1102,248 +1102,239 @@ export default function ChatbotUI() {
   };
 
   return (
-    <>
-      {/* Floating Button - Responsive Size */}
-      <div
-        onClick={() => setOpen(!open)}
-        style={{
-          position: "fixed",
-          bottom: 24,
-          right: 24,
-          width: window.innerWidth <= 768 ? 56 : 64,  // Mobile par chhota
-          height: window.innerWidth <= 768 ? 56 : 64,
-          borderRadius: "50%",
-          background: "linear-gradient(135deg, #7c3aed, #4f46e5)",
-          color: "#fff",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          fontSize: window.innerWidth <= 768 ? 28 : 32,
-          cursor: "pointer",
-          zIndex: 99999,
-          boxShadow: "0 10px 30px rgba(124, 58, 237, 0.4)",
-          transition: "all 0.3s ease",
-          border: "none",
-        }}
-      >
-        {open ? "✖" : "🤖"}
-      </div>
-
-      {/* Chat Window - Fully Responsive */}
-      {open && (
-        <div
-          style={{
-            position: "fixed",
-            bottom: 100,
-            right: 24,
-            width: 380,
-            maxWidth: "calc(100vw - 48px)",   // Mobile par full width minus margin
-            height: "560px",
-            maxHeight: "85vh",                // Mobile par safe height
-            minHeight: "450px",
-            background: "#020617",
-            color: "#fff",
-            borderRadius: 20,
-            zIndex: 99998,
-            display: "flex",
-            flexDirection: "column",
-            boxShadow: "0 20px 60px rgba(0,0,0,0.9)",
-            border: "1px solid #1e293b",
-            animation: "slideUp 0.4s ease-out",
-            boxSizing: "border-box",
-            // Mobile par center karne ke liye
-            left: window.innerWidth <= 768 ? 24 : "auto",
-          }}
-        >
-          {/* Header */}
+    <BrowserOnly fallback={<div></div>}>
+      {() => (
+        <>
+          {/* Floating Button */}
           <div
+            onClick={() => setOpen(!open)}
             style={{
-              padding: "18px 20px",
-              borderBottom: "1px solid #1e293b",
+              position: "fixed",
+              bottom: 24,
+              right: 24,
+              width: 64,
+              height: 64,
+              borderRadius: "50%",
+              background: "linear-gradient(135deg, #7c3aed, #4f46e5)",
+              color: "#fff",
               display: "flex",
-              justifyContent: "space-between",
               alignItems: "center",
-              flexShrink: 0,
-              borderTopLeftRadius: 20,
-              borderTopRightRadius: 20,
-              background: "linear-gradient(to right, #1e1b4b, #0f172a)",
+              justifyContent: "center",
+              fontSize: 32,
+              cursor: "pointer",
+              zIndex: 99999,
+              boxShadow: "0 10px 30px rgba(124, 58, 237, 0.4)",
+              transition: "all 0.3s ease",
+              border: "none",
             }}
           >
-            <div>
-              <div style={{ fontWeight: 700, fontSize: 17 }}>
-                🤖 Book Assistant
-              </div>
-              <div style={{ fontSize: 13, opacity: 0.8 }}>
-                AI helper for Physical AI & Robotics
-              </div>
-            </div>
-            <button
-              onClick={() => setOpen(false)}
-              style={{
-                background: "transparent",
-                border: "none",
-                color: "#94a3b8",
-                fontSize: 26,
-                cursor: "pointer",
-                padding: "4px",
-              }}
-            >
-              ✕
-            </button>
+            {open ? "✖" : "🤖"}
           </div>
 
-          {/* Messages */}
-          <div
-            style={{
-              flex: 1,
-              padding: "16px 16px 80px 16px",
-              overflowY: "auto",
-            }}
-          >
-            {messages.length === 0 && (
+          {/* Chat Window */}
+          {open && (
+            <div
+              style={{
+                position: "fixed",
+                bottom: 100,
+                right: 24,
+                width: "380px",
+                maxWidth: "calc(100vw - 48px)",
+                height: "560px",
+                maxHeight: "85vh",
+                minHeight: "450px",
+                background: "#020617",
+                color: "#fff",
+                borderRadius: 20,
+                zIndex: 99998,
+                display: "flex",
+                flexDirection: "column",
+                boxShadow: "0 20px 60px rgba(0,0,0,0.9)",
+                border: "1px solid #1e293b",
+                animation: "slideUp 0.4s ease-out",
+                boxSizing: "border-box",
+              }}
+            >
+              {/* Header */}
               <div
                 style={{
-                  textAlign: "center",
-                  marginTop: 80,
-                  opacity: 0.7,
-                  fontSize: 15,
-                  lineHeight: "1.6",
-                }}
-              >
-                👋 Ask me anything about Physical AI & Robotics
-                <br />
-                <small style={{ fontSize: 12, opacity: 0.6 }}>
-                  (Minimum 4 characters required)
-                </small>
-              </div>
-            )}
-
-            {messages.map((m, i) => (
-              <div
-                key={i}
-                style={{
+                  padding: "18px 20px",
+                  borderBottom: "1px solid #1e293b",
                   display: "flex",
-                  justifyContent: m.role === "user" ? "flex-end" : "flex-start",
-                  marginBottom: 16,
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  flexShrink: 0,
+                  borderTopLeftRadius: 20,
+                  borderTopRightRadius: 20,
+                  background: "linear-gradient(to right, #1e1b4b, #0f172a)",
                 }}
               >
-                <div
+                <div>
+                  <div style={{ fontWeight: 700, fontSize: 17 }}>
+                    🤖 Book Assistant
+                  </div>
+                  <div style={{ fontSize: 13, opacity: 0.8 }}>
+                    AI helper for Physical AI & Robotics
+                  </div>
+                </div>
+                <button
+                  onClick={() => setOpen(false)}
                   style={{
-                    maxWidth: "85%",
-                    padding: "12px 16px",
-                    borderRadius: 18,
-                    background:
-                      m.role === "user"
-                        ? "#6366f1"
-                        : m.thinking
-                        ? "#1e293b"
-                        : "#1e293b",
-                    border: m.thinking ? "1px dashed #475569" : "none",
-                    fontSize: 14.5,
-                    lineHeight: "1.5",
-                    whiteSpace: "pre-wrap",
+                    background: "transparent",
+                    border: "none",
+                    color: "#94a3b8",
+                    fontSize: 26,
+                    cursor: "pointer",
+                    padding: "4px",
                   }}
                 >
-                  {m.thinking ? (
-                    <>
-                      Thinking
-                      <span className="animate-dots">...</span>
-                    </>
-                  ) : (
-                    m.text
-                  )}
-                </div>
+                  ✕
+                </button>
               </div>
-            ))}
-            <div ref={messagesEndRef} />
-          </div>
 
-          {/* Input */}
-          <div
-            style={{
-              padding: "16px",
-              borderTop: "1px solid #1e293b",
-              display: "flex",
-              gap: 12,
-              flexShrink: 0,
-            }}
-          >
-            <input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && sendMessage()}
-              placeholder="Ask about Physical AI, humanoid robots... (min 4 chars)"
-              style={{
-                flex: 1,
-                padding: "14px 18px",
-                borderRadius: 16,
-                background: "#0f172a",
-                border: "1px solid #334155",
-                color: "#fff",
-                outline: "none",
-                fontSize: 15,
-              }}
-            />
-            <button
-              onClick={sendMessage}
-              style={{
-                padding: "0 24px",
-                borderRadius: 16,
-                background: "linear-gradient(135deg, #7c3aed, #6d28d9)",
-                color: "#fff",
-                border: "none",
-                cursor: "pointer",
-                fontWeight: 600,
-                fontSize: 15,
-                transition: "all 0.2s",
-              }}
-              onMouseOver={(e) => (e.currentTarget.style.opacity = "0.9")}
-              onMouseOut={(e) => (e.currentTarget.style.opacity = "1")}
-            >
-              Send
-            </button>
-          </div>
-        </div>
+              {/* Messages */}
+              <div
+                style={{
+                  flex: 1,
+                  padding: "16px 16px 80px 16px",
+                  overflowY: "auto",
+                }}
+              >
+                {messages.length === 0 && (
+                  <div
+                    style={{
+                      textAlign: "center",
+                      marginTop: 80,
+                      opacity: 0.7,
+                      fontSize: 15,
+                      lineHeight: "1.6",
+                    }}
+                  >
+                    👋 Ask me anything about Physical AI & Robotics
+                    <br />
+                    <small style={{ fontSize: 12, opacity: 0.6 }}>
+                      (Minimum 4 characters required)
+                    </small>
+                  </div>
+                )}
+
+                {messages.map((m, i) => (
+                  <div
+                    key={i}
+                    style={{
+                      display: "flex",
+                      justifyContent: m.role === "user" ? "flex-end" : "flex-start",
+                      marginBottom: 16,
+                    }}
+                  >
+                    <div
+                      style={{
+                        maxWidth: "85%",
+                        padding: "12px 16px",
+                        borderRadius: 18,
+                        background:
+                          m.role === "user"
+                            ? "#6366f1"
+                            : m.thinking
+                            ? "#1e293b"
+                            : "#1e293b",
+                        border: m.thinking ? "1px dashed #475569" : "none",
+                        fontSize: 14.5,
+                        lineHeight: "1.5",
+                        whiteSpace: "pre-wrap",
+                      }}
+                    >
+                      {m.thinking ? (
+                        <>
+                          Thinking
+                          <span className="animate-dots">...</span>
+                        </>
+                      ) : (
+                        m.text
+                      )}
+                    </div>
+                  </div>
+                ))}
+                <div ref={messagesEndRef} />
+              </div>
+
+              {/* Input */}
+              <div
+                style={{
+                  padding: "16px",
+                  borderTop: "1px solid #1e293b",
+                  display: "flex",
+                  gap: 12,
+                  flexShrink: 0,
+                }}
+              >
+                <input
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && sendMessage()}
+                  placeholder="Ask about Physical AI, humanoid robots... (min 4 chars)"
+                  style={{
+                    flex: 1,
+                    padding: "14px 18px",
+                    borderRadius: 16,
+                    background: "#0f172a",
+                    border: "1px solid #334155",
+                    color: "#fff",
+                    outline: "none",
+                    fontSize: 15,
+                  }}
+                />
+                <button
+                  onClick={sendMessage}
+                  style={{
+                    padding: "0 24px",
+                    borderRadius: 16,
+                    background: "linear-gradient(135deg, #7c3aed, #6d28d9)",
+                    color: "#fff",
+                    border: "none",
+                    cursor: "pointer",
+                    fontWeight: 600,
+                    fontSize: 15,
+                    transition: "all 0.2s",
+                  }}
+                  onMouseOver={(e) => (e.currentTarget.style.opacity = "0.9")}
+                  onMouseOut={(e) => (e.currentTarget.style.opacity = "1")}
+                >
+                  Send
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Animations */}
+          <style jsx global>{`
+            @keyframes slideUp {
+              from {
+                opacity: 0;
+                transform: translateY(30px);
+              }
+              to {
+                opacity: 1;
+                transform: translateY(0);
+              }
+            }
+
+            @keyframes dotPulse {
+              0%, 20% { opacity: 0; }
+              40% { opacity: 1; }
+              100% { opacity: 0; }
+            }
+
+            .animate-dots::after {
+              content: '...';
+              animation: dotPulse 1.5s infinite;
+              display: inline-block;
+              width: 1.8em;
+              text-align: left;
+            }
+          `}</style>
+        </>
       )}
-
-      {/* Animations */}
-      <style jsx global>{`
-        @keyframes slideUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes dotPulse {
-          0%, 20% { opacity: 0; }
-          40% { opacity: 1; }
-          100% { opacity: 0; }
-        }
-
-        .animate-dots::after {
-          content: '...';
-          animation: dotPulse 1.5s infinite;
-          display: inline-block;
-          width: 1.8em;
-          text-align: left;
-        }
-
-        /* Mobile-specific adjustments */
-        @media screen and (max-width: 768px) {
-          /* Chat window full width on mobile */
-          [style*="position: fixed; bottom: 100"] {
-            left: 24px !important;
-            right: 24px !important;
-            width: auto !important;
-            maxWidth: none !important;
-          }
-        }
-      `}</style>
-    </>
+    </BrowserOnly>
   );
 }
