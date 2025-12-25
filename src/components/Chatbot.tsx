@@ -997,8 +997,6 @@
 // }
 
 
-
-
 import React, { useState, useRef, useEffect } from "react";
 import { BrowserOnly } from '@docusaurus/BrowserOnly';
 
@@ -1102,7 +1100,7 @@ export default function ChatbotUI() {
   };
 
   return (
-    <BrowserOnly fallback={<div></div>}>
+    <BrowserOnly fallback={<div />}>
       {() => (
         <>
           {/* Floating Button */}
