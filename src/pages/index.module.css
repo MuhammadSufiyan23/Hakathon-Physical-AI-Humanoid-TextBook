@@ -362,25 +362,6 @@
   background-color: var(--ifm-background-color);
 }
 
-.prerequisitesTitle {
-  text-align: center;
-  margin-bottom: 3rem;
-  font-size: 2rem;
-  font-weight: bold;
-  color: var(--ifm-color-primary);
-  position: relative;
-}
-
-.prerequisitesTitle::after {
-  content: '';
-  display: block;
-  width: 80px;
-  height: 4px;
-  background: linear-gradient(90deg, var(--ifm-color-primary), var(--ifm-color-accent));
-  margin: 0.5rem auto;
-  border-radius: 2px;
-}
-
 .pillsContainer {
   display: flex;
   justify-content: center;
@@ -406,63 +387,81 @@
   box-shadow: 0 4px 10px rgba(63, 224, 255, 0.2);
 }
 
-/* Learning Outcomes section */
+/* Learning Outcomes section - NEW STYLISH VERSION */
 .outcomesSection {
-  padding: 4rem 0;
+  padding: 5rem 0;
   background-color: var(--ifm-background-surface-color);
 }
 
-.outcomesTitle {
-  text-align: center;
-  margin-bottom: 3rem;
-  font-size: 2rem;
-  font-weight: bold;
-  color: var(--ifm-color-primary);
-  position: relative;
-}
-
-.outcomesTitle::after {
-  content: '';
-  display: block;
-  width: 80px;
-  height: 4px;
-  background: linear-gradient(90deg, var(--ifm-color-primary), var(--ifm-color-accent));
-  margin: 0.5rem auto;
-  border-radius: 2px;
-}
-
-.outcomesList {
-  max-width: 800px;
-  margin: 0 auto;
+.outcomesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  max-width: 1200px;
+  margin: 3rem auto 0;
   padding: 0 1rem;
 }
 
-.outcomeItem {
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 1.5rem;
-  padding: 1rem;
-  background: rgba(17, 24, 39, 0.4);
-  border-radius: 8px;
-  transition: all 0.3s ease;
+.outcomeCard {
+  background: rgba(17, 24, 39, 0.7);
+  border: 1px solid rgba(63, 224, 255, 0.3);
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.4s ease;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
-.outcomeItem:hover {
-  background: rgba(17, 24, 39, 0.6);
-  transform: translateX(5px);
+.cardHover:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 20px 40px rgba(63, 224, 255, 0.2);
+  border-color: rgba(63, 224, 255, 0.6);
+  background: rgba(17, 24, 39, 0.9);
 }
 
 .outcomeIcon {
-  color: var(--ifm-color-primary);
-  font-size: 1.5rem;
-  margin-right: 1rem;
-  flex-shrink: 0;
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  display: block;
+  background: linear-gradient(135deg, #3FE0FF, #7C7CFF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.outcomeText {
-  color: var(--ifm-color-content);
-  line-height: 1.6;
+.outcomeTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--ifm-color-primary);
+}
+
+.outcomeDesc {
+  color: var(--ifm-color-content-secondary);
+  line-height: 1.7;
   font-size: 1.1rem;
+}
+
+/* Responsive for Learning Outcomes */
+@media screen and (max-width: 996px) {
+  .outcomesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .outcomesGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .outcomeCard {
+    padding: 1.8rem;
+  }
+  
+  .outcomeIcon {
+    font-size: 3rem;
+  }
 }
 
 /* Visual polish */
@@ -481,10 +480,6 @@
 
   .pillsContainer {
     justify-content: center;
-  }
-
-  .outcomesList {
-    padding: 0 1rem;
   }
 }
 
@@ -511,8 +506,6 @@
     align-items: center;
   }
 }
-
-
 
 .underlineRobotics::after {
   content: '';
